@@ -12,15 +12,9 @@ export default class PortfolioContainer extends Component {
         this.state = {
             pageTitle: "Welcome to my portfolio",
             isLoading: false,
-            data: [
-                {title: "Quip", category: "eCommerce", slug:'quip'}, 
-                {title: "Eventbrite", category: "Scheduling", slug: 'eventbrite' },
-                {title: "Ministry safe", category: "Enterprise", slug: 'ministry-safe'},
-                {title: "SwingAway", category: "eCommerce", slug: 'swing-away' }
-            ]
+            data: []
         };
         this.handleFilter = this.handleFilter.bind(this)
-        this.getPortfolioItems=this.getPortfolioItems.bind()
 
     }
 
@@ -35,18 +29,27 @@ export default class PortfolioContainer extends Component {
     getPortfolioItems() {
         axios
         .get("https://tysonboren.devcamp.space/portfolio/portfolio_items")
-        .then(( response) => {
-          console.log('response data', response);
+        .then( response => {
+          this.setState({
+              data: response.data.portfolio_items
+          })
         }) 
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
       }
 
     portfolioItems() {
         return this.state.data.map(item => {
-            return <PortfolioItem title={item.title} url={"google.com"} slug={item.slug} />
+            console.log(item)
+            return (
+            <PortfolioItem title={item.name} url={item.url} slug={item.id} />
+            );
         });
+    }
+
+    componentDidMount() {
+        this.getPortfolioItems()
     }
 
     
@@ -62,7 +65,6 @@ export default class PortfolioContainer extends Component {
                 <button onClick={() => this.handleFilter('eCommerce')}>eCommerce</button>
                 <button onClick={() => this.handleFilter('Scheduling')}>Scheduling</button>
                 <button onClick={() => this.handleFilter('Enterprise')}>Enterprise</button>
-
                 {this.portfolioItems()}
             </div>
         );

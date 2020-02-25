@@ -19,13 +19,11 @@ import NoMatch from './pages/no-match'
 export default class App extends Component {
 constructor() {
   super()
-  this.getPortfolioItems=this.getPortfolioItems.bind()
 }
 
 
 
   render() {
-    this.getPortfolioItems();
     return (
       <div className='app'>
         <Router>
