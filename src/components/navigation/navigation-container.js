@@ -12,7 +12,7 @@ export default class NavigationComponent extends Component {
     render() {
         return (
             <div>
-                <NavLink exact to="/"vactiveClassName="nav-link-active">
+                <NavLink exact to="/" activeClassName="nav-link-active">
                     Home
                 </NavLink>
 
