@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PortfolioItem from "./portfolio-item"
+import axios from 'axios';
+
 
 
 
@@ -18,6 +20,8 @@ export default class PortfolioContainer extends Component {
             ]
         };
         this.handleFilter = this.handleFilter.bind(this)
+        this.getPortfolioItems=this.getPortfolioItems.bind()
+
     }
 
     handleFilter(filter) {
@@ -27,6 +31,17 @@ export default class PortfolioContainer extends Component {
             })
         });
     }
+
+    getPortfolioItems() {
+        axios
+        .get("https://tysonboren.devcamp.space/portfolio/portfolio_items")
+        .then(( response) => {
+          console.log('response data', response);
+        }) 
+      .catch((error) => {
+        console.log(error);
+      });
+      }
 
     portfolioItems() {
         return this.state.data.map(item => {

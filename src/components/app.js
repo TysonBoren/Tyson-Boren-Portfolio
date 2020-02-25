@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import axios from 'axios';
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,16 +22,7 @@ constructor() {
   this.getPortfolioItems=this.getPortfolioItems.bind()
 }
 
-  getPortfolioItems() {
-    axios
-    .get("https://tysonboren.devcamp.space/portfolio/portfolio_items")
-    .then(( response) => {
-      console.log('response data', response);
-    }) 
-  .catch((error) => {
-    console.log(error);
-  });
-  }
+
 
   render() {
     this.getPortfolioItems();
