@@ -12,22 +12,24 @@ export default function(props) {
         //description: description
         //id: id
 
-        const{ id, description, thumb_image_url, logo } = props.item
+        const{ id, description, thumb_image_url, logo_url } = props.item
     return (
         <div className="portfolio-item-wrapper">
-        <div
-            className='portfolio-img-background'
-            style={{
-                // backgroundImage: "url(" + thumb_image_url + ")",
-                backgroundImage: `url(${thumb_image_url})`
-            }}
-        />
+            <div
+                className='portfolio-img-background'
+                style={{
+                    // backgroundImage: "url(" + thumb_image_url + ")",
+                    backgroundImage: `url(${thumb_image_url})`
+                }}
+            />
 
+            <div className="img-text-wrapper">
+                <div className="logo-wrapper">
+                    <img src={logo_url} />
+                </div>
 
-
-        <img src={logo} />
-        <div>{description}</div>
-        <Link to={`/portfolio/${id}`}>Link</Link>
+                <div className="subtitle">{description}</div>
+            </div>
         </div>
     )
 }
