@@ -24,7 +24,7 @@ constructor() {
 
   render() {
     return (
-      <div className='app'>
+      <div className='container'>
         <Router>
           <div>
             <NavigationContainer />
