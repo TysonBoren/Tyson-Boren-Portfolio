@@ -12,6 +12,7 @@ import About from './pages/about'
 import Contact from './pages/contact'
 import Blog from './pages/blog'
 import PortfolioDetail from "./portfolio/portfolio-detail"
+import Auth from "./pages/auth"
 import NoMatch from './pages/no-match'
 
 
@@ -34,6 +35,7 @@ constructor() {
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog} />
               <Route exact path="/portfolio/:slug" component={PortfolioDetail} />
+              <Route path='/auth' component={Auth} />
               <Route component={NoMatch} />
             </Switch>
           </div>
