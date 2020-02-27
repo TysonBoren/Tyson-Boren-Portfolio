@@ -15,16 +15,15 @@ export default class Login extends Component {
         console.log("handle change", event)
         this.setState({
             [event.target.name]: event.target.value
-            
+
         })
 
     }
 
     handleSubmit(event) {
-        console.log('handle submit', event)
-        this.setState({
-
-        })
+        console.log('handle submit', this.state.email, this.state.password)
+        //prevents email and password being printed in console. 
+        event.preventDefault();
     }
 
 
