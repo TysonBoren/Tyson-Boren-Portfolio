@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 
 export default class Login extends Component {
     constructor(props) {
@@ -21,7 +22,17 @@ export default class Login extends Component {
     }
 
     handleSubmit(event) {
-        console.log('handle submit', this.state.email, this.state.password)
+        axios.post("https://api.devcamp.space/sessions", 
+            {
+                client: {
+                    email:this.state.email,
+                    password: this.state.password
+                }
+            },
+            { withCredentials: true }
+        ).then(response => {
+            console.log('response', response);
+        })
         //prevents email and password being printed in console. 
         event.preventDefault();
     }
@@ -33,8 +44,8 @@ export default class Login extends Component {
             <div>
                 <h1>LOGIN TO ACCESS YOUR DASHBOARD</h1>
                 
-                <h2>{this.state.email}</h2>
-                <h2>{this.state.password}</h2>
+                {/* <h2>{this.state.email}</h2>
+                <h2>{this.state.password}</h2> */}
 
                 <form onSubmit={this.handleSubmit}>
                     <input 
@@ -43,6 +54,7 @@ export default class Login extends Component {
                         placeholder="Your email..."
                         value={this.state.email}
                         onChange={this.handleChange}
+                        autoComplete='off'
                     />
 
                     <input 
@@ -51,6 +63,8 @@ export default class Login extends Component {
                         placeholder="Your Password..."
                         value={this.state.password}
                         onChange={this.handleChange}
+                        autoComplete='off'
+
                     />
                     <div>
                         <button type="submit">Login</button>
