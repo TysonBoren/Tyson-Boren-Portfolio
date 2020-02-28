@@ -12,9 +12,14 @@ export default class PortfolioManager extends Component {
 
     render() {
         return (
-            <div>
-                <h1>PortfolioManager</h1>
-                <h1>PortfolioManager</h1>
+            <div className="portfolio-manager-wrapper">
+                <div className="left-column">
+                    <h1>PortfolioManager</h1>
+                </div>
+                
+                <div className="right-column">
+                    <h1>PortfolioManager</h1>
+                </div>
             </div>
         )
     }
