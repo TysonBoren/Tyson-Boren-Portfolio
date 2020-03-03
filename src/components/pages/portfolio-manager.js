@@ -17,6 +17,13 @@ export default class PortfolioManager extends Component {
         this.handleFromSubmissionError = this.handleFromSubmissionError.bind(this)
         this.handleDeleteClick = this.handleDeleteClick.bind(this)
         this.handleEditClick = this.handleEditClick.bind(this)
+        this.clearPortfolioToEdit = this.clearPortfolioToEdit.bind(this)
+    }
+
+    clearPortfolioToEdit() {
+        this.setState({
+            portfolioToEdit: {}
+        })
     }
 
     handleEditClick(portfolioItem) {
@@ -80,6 +87,8 @@ export default class PortfolioManager extends Component {
                     <PortfolioForm 
                         handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
                         handleFromSubmissionError={this.handleFromSubmissionError}
+                        clearPortfolioToEdit={this.clearPortfolioToEdit}
+                        portfolioToEdit={this.state.portfolioToEdit}
                     />
                 </div>
 
