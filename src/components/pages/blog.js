@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios";
 import BlogItem from "../blog/blog-item"
+import BlogModal from "../modals/blog-modal"
 
 export default class Blog extends Component {
     constructor() {
@@ -16,19 +17,19 @@ export default class Blog extends Component {
         }
 
         this.getBlogItems = this.getBlogItems.bind(this)
-        this.activateInfiniteScroll()
+        this.onScroll = this.onScroll.bind(this)
+        window.addEventListener("scroll", this.onScroll, false)
     }
 
-    activateInfiniteScroll() {
-        window.onscroll = () => {
-            if (this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
-                    return;
-                }
-
-            if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight
-            ) {
-                this.getBlogItems();
+    onScroll() {
+       
+        if (this.state.isLoading || this.state.blogItems.length === this.state.totalCount) {
+                return;
             }
+
+        if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight
+        ) {
+            this.getBlogItems();
         }
     }
 
@@ -61,8 +62,10 @@ export default class Blog extends Component {
         this.getBlogItems()
     }
 
-
-
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.onScroll, false)
+    }
+    
 
     render() {
         const blogRecords = this.state.blogItems.map(blogItem => {
@@ -70,6 +73,7 @@ export default class Blog extends Component {
         });
         return (
             <div className='blog-container'>
+            <BlogModal />
                 <div className="content-container">
                     {blogRecords}
                 </div>
