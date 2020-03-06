@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom"
+
 
 export default class BlogDetail extends Component {
     constructor() {
@@ -12,9 +12,7 @@ export default class BlogDetail extends Component {
     render() {
         return (
             <div>
-                <Link to={`/b/${id}`}>
                     <h1>blog detail</h1>
-                </Link>
             </div>
         )
     }
