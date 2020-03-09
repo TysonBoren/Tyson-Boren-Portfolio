@@ -1,16 +1,52 @@
 import React, { Component } from "react";
 import ReactModal from "react-modal"
+import BlogForm from '../blog/blog-form'
+
+ReactModal.setAppElement(".app-wrapper")
 
 export default class BlogModal extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+
+        this.customStyles = {
+            content: {
+                top: '50%',
+                left: '50%',
+                right: 'auto',
+                marginRight: "-50%",
+                transform: "translate(-50%, -50%)",
+                width: "800px"
+            },
+            overlay: {
+                backgroundColor: "rgba(1, 1, 1, 0.75)"
+            }
+        }
+
+        this.handleSuccessfullFormSubmission = this.handleSuccessfullFormSubmission.bind(this)
+
+
     }
+
+    handleSuccessfullFormSubmission(blog) {
+        this.props.handleSuccessfulNewBlogSubmission(blog)
+    }
+
+
+
+
 
     render() {
         return (
             <div>
-                <ReactModal isOpen={true}>
-                    <h1>I'm in a modal! Jin gonna find a HOT chocolate woman to wine and dine!!!!</h1>
+                <ReactModal 
+                style={this.customStyles}
+                onRequestClose={() => {
+                    this.props.handleModalClose();
+                }} 
+                isOpen={this.props.modalIsOpen}
+                >
+                
+                    <BlogForm handleSuccessfullFormSubmission={this.handleSuccessfullFormSubmission}/>
                 </ReactModal>
             </div>
         )
