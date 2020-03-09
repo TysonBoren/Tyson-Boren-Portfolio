@@ -81,7 +81,7 @@ export default class BlogForm extends Component {
             </div>
 
             <div className="one-column">
-                <RichTextEditor />
+                <RichTextEditor handleRichTextEditor={this.handleRichTextEditor}/>
             </div>
 
                 <button className = "btn">Save</button>
