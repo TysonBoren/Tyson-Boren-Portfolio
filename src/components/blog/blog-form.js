@@ -11,10 +11,16 @@ export default class BlogForm extends Component {
         this.state = {
             title: "",
             blog_status: "",
+            content: "",
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleRichTextEditor = this.handleRichTextEditor.bind(this)
+    }
+
+    handleRichTextEditor(content) {
+        this.setState({ content })
     }
 
     buildForm() {
@@ -22,6 +28,7 @@ export default class BlogForm extends Component {
 
         formData.append("portfolio_blog[title]", this.state.title)
         formData.append("portfolio_blog[blog_status]", this.state.blog_status)
+        formData.append("portfolio_blog[content]", this.state.content)
 
         return formData;
     }
