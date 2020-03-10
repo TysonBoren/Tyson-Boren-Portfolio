@@ -37,20 +37,28 @@ export default class BlogDetail extends Component {
     }
 
     handleEditClick() {
-        console.log('handle edit clicked')
-        this.setState({ editMode: true })
+        console.log('handle edit clicked', this.props)
+        if (this.props.loggedInStatus === "LOGGED_IN") {
+            this.setState({ editMode: true })
+        }
     }
 
     getBlogItem() {
-        axios.get(`https://tysonboren.devcamp.space/portfolio/portfolio_blogs/${this.state.currentId}`
-        ).then(response =>{
+        axios
+        .get(
+            `https://tysonboren.devcamp.space/portfolio/portfolio_blogs/${
+                this.state.currentId
+            }`
+        )
+        .then(response => {
             // console.log("response", response.data.portfolio_blog);
             this.setState({
                 blogItem: response.data.portfolio_blog
-            })
-        }).catch(error => {
-            console.log("getBlogItem", error)
+            });
         })
+        .catch(error => {
+            console.log("getBlogItem", error)
+        });
     }
 
     componentDidMount() {
@@ -77,7 +85,7 @@ export default class BlogDetail extends Component {
                     handleFeaturedImageDelete={this.handleFeaturedImageDelete} 
                     handleUpdateFormSubmission={this.handleUpdateFormSubmission}
                     editMode={this.state.editMode} 
-                    blogToEdit={this.state.blogItem} 
+                    blog={this.state.blogItem} 
 
                     />
                 )

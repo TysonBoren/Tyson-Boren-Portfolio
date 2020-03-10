@@ -36,7 +36,7 @@ export default class BlogForm extends Component {
 
     deleteImage(imageType) {
         axios.delete(
-            `https://api.devcamp.space/portfolio/delete-portfolio-blog-image/${this.props.blogToEdit.id}?image_type=${imageType}`,
+            `https://api.devcamp.space/portfolio/delete-portfolio-blog-image/${this.props.blog.id}?image_type=${imageType}`,
              { withCredentials: true }
         ).then(response => {
             this.props.handleFeaturedImageDelete(response);
@@ -48,11 +48,11 @@ export default class BlogForm extends Component {
     componentWillMount() {
         if (this.props.editMode) {
             this.setState({
-                id: this.props.blogToEdit.id,
-                title: this.props.blogToEdit.title,
-                blog_status: this.props.blogToEdit.blog_status,
-                content: this.props.blogToEdit.content,
-                apiUrl: `https://tysonboren.devcamp.space/portfolio/portfolio_blogs/${this.props.blogToEdit.id}`,
+                id: this.props.blog.id,
+                title: this.props.blog.title,
+                blog_status: this.props.blog.blog_status,
+                content: this.props.blog.content,
+                apiUrl: `https://tysonboren.devcamp.space/portfolio/portfolio_blogs/${this.props.blog.id}`,
                 apiAction: "patch"
             })
         }
@@ -164,16 +164,16 @@ export default class BlogForm extends Component {
                         handleRichTextEditorChange={this.handleRichTextEditorChange}
                         editMode={this.props.editMode}
                         contentToEdit={
-                            this.props.editMode && this.props.blogToEdit.content 
-                            ? this.props.blogToEdit.content 
+                            this.props.editMode && this.props.blog.content 
+                            ? this.props.blog.content 
                             : null}
                     />
                 </div>
 
                 <div className="image-uploaders">
-                {this.props.editMode && this.props.blogToEdit.featured_image_url ? (
+                {this.props.editMode && this.props.blog.featured_image_url ? (
                     <div className="portfolio-manager-image-wrapper">
-                        <img src={this.props.blogToEdit.featured_image_url} />
+                        <img src={this.props.blog.featured_image_url} />
 
                         <div className="image-removal-link">
                             <a onClick={() => this.deleteImage("featured_image")}>Remove Image</a>
