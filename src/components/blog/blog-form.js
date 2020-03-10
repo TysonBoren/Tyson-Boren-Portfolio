@@ -15,7 +15,10 @@ export default class BlogForm extends Component {
             title: "",
             blog_status: "",
             content: "",
-            featured_image: ""
+            featured_image: "",
+            apiUrl: "https://tysonboren.devcamp.space/portfolio/portfolio_blogs",
+            apiAction: "post"
+
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -29,12 +32,14 @@ export default class BlogForm extends Component {
         this.featuredImageRef = React.createRef();
     }
 
+    
+
     deleteImage(imageType) {
         axios.delete(
             `https://api.devcamp.space/portfolio/delete-portfolio-blog-image/${this.props.blogToEdit.id}?image_type=${imageType}`,
              { withCredentials: true }
         ).then(response => {
-            this.props.handleFeaturedImageDelete();
+            this.props.handleFeaturedImageDelete(response);
         }).catch(error => {
             console.log('deleteImage error', error)
         })
@@ -45,7 +50,10 @@ export default class BlogForm extends Component {
             this.setState({
                 id: this.props.blogToEdit.id,
                 title: this.props.blogToEdit.title,
-                status: this.props.blogToEdit.status
+                blog_status: this.props.blogToEdit.blog_status,
+                content: this.props.blogToEdit.content,
+                apiUrl: `https://tysonboren.devcamp.space/portfolio/portfolio_blogs/${this.props.blogToEdit.id}`,
+                apiAction: "patch"
             })
         }
     }
@@ -91,31 +99,35 @@ export default class BlogForm extends Component {
 
 
     handleSubmit(event) {
-        axios.post(
-            "https://tysonboren.devcamp.space/portfolio/portfolio_blogs", 
-            this.buildForm(), 
-            { withCredentials: true }
-        ).then(response => {
-            if (this.state.featured_image) {
-                this.featuredImageRef.current.dropzone.removeAllFiles();
-            }
-
-            this.setState({
-                title: "",
-                blog_status: "",
-                content: "",
-                featured_image: ""
-            });
-            
-            
-            this.props.handleSuccessfullFormSubmission(
-                response.data.portfolio_blog
-                );
-
-            
-        }).catch(error => {
-            console.log("handleSubmit for blog error", error)
+        axios({
+            method: this.state.apiAction,
+            url: this.state.apiUrl,
+            data: this.buildForm(),
+            withCredentials: true
         })
+            .then(response => {
+                if (this.state.featured_image) {
+                    this.featuredImageRef.current.dropzone.removeAllFiles();
+                }
+
+                this.setState({
+                    title: "",
+                    blog_status: "",
+                    content: "",
+                    featured_image: ""
+                });
+                
+                if (this.props.editMode) {
+                    //update blog
+                    this.props.handleUpdateFormSubmission(response.data.portfolio_blog)
+                } else {
+                    this.props.handleSuccessfullFormSubmission(
+                        response.data.portfolio_blog
+                    );
+                }
+            }).catch(error => {
+                console.log("handleSubmit for blog error", error)
+            })
 
         event.preventDefault()
     }
