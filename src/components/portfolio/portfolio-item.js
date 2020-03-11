@@ -34,30 +34,32 @@ export default class PortfolioItem extends Component {
             //id: id
 
         return (
-            <div className="portfolio-item-wrapper"
-            //these are the functions you need to bind UNLESS you use arrow functions. 
-            // onMouseEnter={this.handleMouseEnter}
-            // onMouseLeave={this.handleMouseLeave}
-            onMouseEnter={() => this.handleMouseEnter()}
-            onMouseLeave={() => this.handleMouseLeave()}
-            
-            >
-                <div
-                    className={'portfolio-img-background ' + this.state.portfolioItemClass}
-                    style={{
-                        // backgroundImage: "url(" + thumb_image_url + ")",
-                        backgroundImage: `url(${thumb_image_url})`
-                    }}
-                />
+            <Link to={`/portfolio/${id}`}>
+                <div className="portfolio-item-wrapper"
+                //these are the functions you need to bind UNLESS you use arrow functions. 
+                // onMouseEnter={this.handleMouseEnter}
+                // onMouseLeave={this.handleMouseLeave}
+                onMouseEnter={() => this.handleMouseEnter()}
+                onMouseLeave={() => this.handleMouseLeave()}
+                
+                >
+                    <div
+                        className={'portfolio-img-background ' + this.state.portfolioItemClass}
+                        style={{
+                            // backgroundImage: "url(" + thumb_image_url + ")",
+                            backgroundImage: `url(${thumb_image_url})`
+                        }}
+                    />
 
-                <div className="img-text-wrapper">
-                    <div className="logo-wrapper">
-                        <img src={logo_url} />
+                    <div className="img-text-wrapper">
+                        <div className="logo-wrapper">
+                            <img src={logo_url} />
+                        </div>
+
+                        <div className="subtitle">{description}</div>
                     </div>
-
-                    <div className="subtitle">{description}</div>
                 </div>
-            </div>
+            </Link>
         )
     }
 }
