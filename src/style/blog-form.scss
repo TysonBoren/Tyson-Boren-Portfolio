@@ -11,6 +11,10 @@
     .image-uploaders {
         @include base-grid();
         grid-template-columns: 200px;
+
+        img {
+            max-width: 816px;
+        }
         
         
         // display: flex;
