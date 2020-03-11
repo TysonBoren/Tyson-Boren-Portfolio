@@ -50,6 +50,7 @@ class PortfolioDetail extends Component {
         const logoStyles = {
             width: "200px"
         }
+        
         return (
             <div className="portfolio-detail-wrapper">
                 <div className="banner" style={bannerStyles}>
